@@ -1,10 +1,12 @@
 import axios from 'axios';
 import React from 'react';
+import {useNavigate} from 'react-router-dom';
 
 export const Form = () => {
 
     const [Num, setNum] = React.useState('')
     const [Name, setName] = React.useState('')
+    const navigate = useNavigate();
 
     // const handleChange = async(e) => {
     //     //handlechange
@@ -51,7 +53,20 @@ export const Form = () => {
                 console.log(error);
             });
 
+            // const task = { ActNumber: Num, ActName: Name };
+            // if (task.Num && task.Num.length > 0) {
+            // axios
+            //     .post('http://localhost:5000/api/acts/pst', task)
+            //     .then((res) => {
+            //         if (res.data) {
+            //             setNum('');
+            //             setName('');
+            //         }
+            //     })
+            //     .catch((err) => console.log(err));
+            // }  
             
+            navigate("/");
         }
         // axios({
         //     method: 'post',
@@ -82,14 +97,14 @@ export const Form = () => {
     return(
         <>
             <div>
-                <form>
+                <form onSubmit={handleSubmit} method="post"> 
                     <div className="form-group">
                         <label>Activity Number</label>
                         <input type="text" className="form-control" value={Num} onChange={(e) => setNum(e.target.value)} id="textFormControlInput1" placeholder="Enter Activity Number: " required={true}></input>
                     </div>
                     <div className="form-group">
                         <label>Activity Name</label>
-                        <input type="text" className="form-control" value={Name} onChange={(e) => setName(e.target.value)}id="exampleFormControlInput1" placeholder="Enter Name: " required={true}></input>
+                        <input type="text" className="form-control" value={Name} onChange={(e) => setName(e.target.value)} id="textFormControlInput1" placeholder="Enter Name: " required={true}></input>
                     </div>
                     
                     <button type="submit" className="btn btn-primary" onSubmit={handleSubmit}>Submit</button>
